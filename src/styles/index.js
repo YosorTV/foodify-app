@@ -43,20 +43,48 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh
+`;
+
+export const Section = styled.section`
+  margin-top: 5rem;
 `;
 
 export const DishCard = styled(Card)`
-  margin: 10rem 0rem 2rem 0rem;
+  max-width: 600px;
+  margin: 0 auto;
   img{
     height: 300px;
     object-fit: cover;
   }
   figcaption{
-    p{
+    .tags{
       display: flex;
-      align-items: center;
-      transition: all 0.2s ease;
+      justify-content: space-between;
+      margin-bottom: .5rem;
     }
+    p {
+      height: 124px;
+      padding: .5rem .5rem 0 0;
+      text-overflow: ellipsis;
+      overflow: auto;
+        &::-webkit-scrollbar {
+          width: .2rem;
+        }
+        &::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px #424242;
+          border-radius: 20px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #4caf50;
+        }
+      }
+    }
+  .actions{
+    justify-content: space-between;
   }
 `;
+
+export const FavCard = styled(DishCard)`
+  max-width: none;
+  margin: 1rem 1rem;
+`

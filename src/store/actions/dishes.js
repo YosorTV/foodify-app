@@ -1,4 +1,6 @@
+// Types
 import { dishes } from "../types"
+// Axios
 import { api } from '../../api';
 
 export const dishesActions = Object.freeze({
@@ -16,4 +18,16 @@ export const dishesActions = Object.freeze({
         }
     }
   },
+  setDish:(data) => {
+    return {
+      type:dishes.SET_DISH_TO_FAVOURITE,
+      payload:data
+    }
+  },
+  removeDish:(data) => {
+    return {
+      type: dishes.REMOVE_DISH,
+      payload: data
+    }
+  }
 })

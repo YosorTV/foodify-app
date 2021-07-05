@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 // Styles
 import { theme } from './styles';
 // Pages
-import { RandomDish } from './views';
+import { RandomDish, FavouriteDishes } from './views';
 //Components
 import { NotFound, Layout } from './components';
 
@@ -15,7 +15,7 @@ const App = () => {
       <Routes>
         <Layout>
           <Route path="/" element={<RandomDish />}/>
-          <Route path="/favourites" element={<h1>favourites</h1>}/>
+          <Route path="/favourites" element={<FavouriteDishes />}/>
           <Route path="*" element={<NotFound/>} />
         </Layout>
       </Routes>
