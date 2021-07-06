@@ -19,8 +19,8 @@ const saveDish = (dishId) => {
   const dish = meals?.filter(({ idMeal }) => idMeal === dishId);
     if (favourites.includes(...dish)) return
       save(...dish);
-      localStorage.setItem('favDishes', JSON.stringify(favourites));
-    };
+  };
+  localStorage.setItem('favDishes', JSON.stringify(favourites));
   useEffect(() => load(), []); 
   return (
     <>

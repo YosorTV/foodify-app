@@ -40,11 +40,17 @@ export const dishesReducer = (state = initialState, {type, payload}) => {
     }
     case dishes.REMOVE_DISH:{
       const dishes = JSON.parse(localStorage.getItem('favDishes'));
-      const item = dishes.filter((item) => item.idMeal !== payload.idMeal)
-        localStorage.setItem('favDishes', JSON.stringify(item))
+      const item = dishes.filter((item) => item.idMeal !== payload.idMeal);
+      localStorage.setItem('favDishes', JSON.stringify(item));
       return {
         ...state,
         favourites:state.favourites.filter((item) => item.idMeal !== payload.idMeal)
+      }
+    }
+    case dishes.ADD_DISH:{
+      return {
+        ...state,
+        favourites:[payload, ...state.favourites]
       }
     }
     default:{

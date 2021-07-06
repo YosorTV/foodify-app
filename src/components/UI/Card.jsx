@@ -1,11 +1,21 @@
+// Core
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion'
+//MUI
 import { Skeleton } from '@material-ui/lab';
 import { CardActions, CardContent, CardMedia, Typography, Chip, IconButton, Grid, Divider } from '@material-ui/core';
 import { YouTube, Favorite, Cached } from '@material-ui/icons';
+// Styles
 import { DishCard as Card } from '../../styles';
+// Other
 import placeholder from '../../assets/menu-item-placeholder.png';
+// Selectors
+import { dishesSelector } from '../../store/selectors';
+import { popUp } from '../../styles/animation';
 
 export const MediaCard = ({ data, onSkip, loading, onSave }) => {
+  const { favourites } = useSelector(dishesSelector);
   //Card Image
   const CardImgJSX = loading
   ? <Skeleton animation="wave" variant="rect" height={300} /> 
@@ -46,27 +56,31 @@ export const MediaCard = ({ data, onSkip, loading, onSave }) => {
 
   return (
     <Grid container justify="center" alignItems="center" component="section">
-      <Grid item xs={10} sm={10} md={10} lg={10} xl={4} style={{ marginTop:"12rem"}}>
-      <Card component={'figure'}>
-        { CardImgJSX }
-          <CardContent component={'figcaption'}>
-            { CardTitleJSX }
-            <div className="tags">
-              {CardTagJSX}
-              {CardYouTubeJSX}
-            </div>
-            { CardDescriptionJSX }
-          </CardContent>
-        <Divider />
-        <CardActions className="actions">
-          <IconButton color="primary" onClick = { () => onSkip() }>
-            <Cached />
-          </IconButton>
-          <IconButton color="secondary" onClick = { () => onSave(data?.idMeal) }>
-            <Favorite />
-          </IconButton>
-        </CardActions>
-      </Card>
+      <Grid item xs={10} sm={10} md={10} lg={10} xl={4} style={{ marginTop:"5rem"}}>
+      <AnimatePresence>
+        { !loading && 
+          <Card component={motion.figure} variants={popUp} initial="hidden" animate="show">
+            { CardImgJSX }
+              <CardContent component={'figcaption'}>
+                { CardTitleJSX }
+                <div className="tags">
+                  {CardTagJSX}
+                  {CardYouTubeJSX}
+                </div>
+                { CardDescriptionJSX }
+              </CardContent>
+            <Divider />
+            <CardActions className="actions">
+              <IconButton color="primary" onClick = { () => onSkip() }>
+                <Cached />
+              </IconButton>
+              <IconButton disabled={favourites.includes(data) ? true : false } color="secondary" onClick = { () => onSave(data?.idMeal) }>
+                <Favorite />
+              </IconButton>
+            </CardActions>
+          </Card>
+        }
+      </AnimatePresence>
       </Grid>
     </Grid>
   );

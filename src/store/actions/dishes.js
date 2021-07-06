@@ -29,5 +29,11 @@ export const dishesActions = Object.freeze({
       type: dishes.REMOVE_DISH,
       payload: data
     }
+  },
+  addDish:(data) => {
+    return {
+      type: dishes.ADD_DISH,
+      payload:data
+    }
   }
 })

@@ -11,12 +11,10 @@ import App from './App';
 import { store } from './store/init/store';
 
 ReactDOM.render(
-  <React.StrictMode>
   <Provider store = {store}>
     <Router>
       <App />
     </Router>
-  </Provider>
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
